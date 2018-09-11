@@ -9,13 +9,13 @@ var Articles = require("./models/articles");
 
 var db = process.env.MONGODB_URI || "mongodb://localhost/articlesdb";
 
+var app = express();
 
 var PORT = 3000;
 
 
-var app = express();
 
-mongoose.connect(db, function(error) {
+mongoose.connect(db, function (error) {
     if (error) {
         console.log(error);
     } else {
@@ -32,19 +32,19 @@ app.use(express.static("public"));
 app.engine(
     "handlebars",
     exphbs({
-     defaultLayout: "main"
+        defaultLayout: "main"
     })
-   );
-   app.set("view engine", "handlebars");
-   require("./routes/apiRoutes")(app);
-// require("./routes/htmlRoutes")(app);
+);
+app.set("view engine", "handlebars");
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
-  });
+});
 
-  module.exports = app;
-  
+module.exports = app;
+
 scrape();
 
