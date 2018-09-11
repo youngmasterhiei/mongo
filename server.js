@@ -1,4 +1,37 @@
 var scrape = require("./script/scrape.js");
+var express = require("express");
+var bodyParser = require("body-parser");
+var exphbs = require("express-handlebars");
+var mongoose = require("mongoose");
 
 
+var Articles = require("./models/articles");
+
+var db = process.env.MONGODB_URI || "mongodb://localhost/articlesdb";
+
+
+var PORT = 3000;
+
+
+var app = express();
+
+mongoose.connect(db, function(error) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("mongoose connection is successful");
+    }
+});
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+// Use express.static to serve the public folder as a static directory
+app.use(express.static("public"));
+
+
+app.listen(PORT, function() {
+    console.log("App running on port " + PORT + "!");
+  });
+  
 scrape();
+
