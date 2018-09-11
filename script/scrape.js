@@ -23,7 +23,7 @@ var scrape = function () {
 
     // With cheerio, find each p-tag with the "title" class
     // (i: iterator. element: the current element)
-    $("h3").each(function (i, element) {
+    $("div.info").each(function (i, element) {
 
       // Save the text of the element in a "title" variable
       var title = $(element).text();
@@ -31,9 +31,10 @@ var scrape = function () {
 
       // In the currently selected element, look at its child elements (i.e., its a-tags),
       // then save the values for any "href" attributes that the child elements may have
-      var link = $(element).children().attr("href");
+      var link = $($(this).children("h3")).children("a").attr("href");
 
-      var summary = $("<p data-v-7cf20f0a> </p>").text();
+
+      var summary = $($(this)).children("p").text();
 
       db.Article.create({
         title: title,
