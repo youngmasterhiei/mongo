@@ -36,6 +36,8 @@ var scrape = function () {
 
       var summary = $($(this)).children("p").text();
 
+      
+
       db.Article.create({
         title: title,
         link: link,
