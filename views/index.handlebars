@@ -1,17 +1,12 @@
-<h1 class="display-4">My To-Do List:</h1>
+<h1 class="display-4">Article List:</h1>
             <ul id="to-do-list" class="list-group">
               {{#each examples}}
               <li data-id="{{this.id}}" class="list-group-item">
-                <a href="index/{{this.id}}">{{this.text}}</a>
+                <a href="index{{this.id}}">{{this.text}}</a>
               </li>
               {{/each}}
               <br>
             </ul>
 
-
-             <p>
-                                    Welcome to
-                                    <strong>The Healthy Weight Challenge!</strong> We are here to help you reach your goals
-                                    one calorie at a time. Please take a moment to record your profile information accurately
-                                    so you can begin competing against other users by counting calories in a fun way.
-                                </p>
+<div id = "articles"></div>
+          
