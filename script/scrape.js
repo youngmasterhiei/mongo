@@ -26,7 +26,7 @@ var scrape = function () {
     $("div.info").each(function (i, element) {
 
       // Save the text of the element in a "title" variable
-      var title = $(element).text();
+      var titleS = $(element).text();
 
 
       // In the currently selected element, look at its child elements (i.e., its a-tags),
@@ -36,20 +36,30 @@ var scrape = function () {
 
       var summary = $($(this)).children("p").text();
 
-      
+      db.Article.find({ title: titleS});
 
-      db.Article.create({
-        title: title,
-        link: link,
-        summary: summary
-      }, function (err, ArticleSchema) {
-        if (err) return handleError(err);
-        // saved!
-      });
 
-      // Save these results in an object that we'll push into the results array we defined earlier
+      db.Article.findOne({title: titleS}, function (err, result) {
+        if (err) {console.log(err)}
+        if (!result) {
+           console.log("title not found");
+           db.Article.create({
+            title: titleS,
+            link: link,
+            summary: summary
+          }, function (err, ArticleSchema) {
+            if (err) return handleError(err);
+            // saved!
+          });
+        }
+        else {
+          
+          console.log("title found");
+        }
+    });
+
       results.push({
-        title: title,
+        title: titleS,
         link: link,
         summary: summary
       });

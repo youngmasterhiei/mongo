@@ -6,6 +6,8 @@ var mongoose = require("mongoose");
 
 
 var Articles = require("./models/articles");
+var Comments = require("./models/comments");
+
 
 var db = process.env.MONGODB_URI || "mongodb://localhost/articlesdb";
 
